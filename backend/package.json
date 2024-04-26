@@ -1,0 +1,35 @@
+{
+  "name": "shatap",
+  "version": "1.0.0",
+  "description": "web based chat application for learning purpose",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chisomchris/shatap.git"
+  },
+  "keywords": [
+    "chat",
+    "websocket",
+    "web-rtc"
+  ],
+  "author": "christian chisom & ifeoma okpara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chisomchris/shatap/issues"
+  },
+  "homepage": "https://github.com/chisomchris/shatap#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
