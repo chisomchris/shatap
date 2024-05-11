@@ -44,17 +44,17 @@ the following conventions must be followed for consistency
     }
     ``` 
     ```javascript
-    function Page () {
+    function HomePage () {
         return <div>...</div>
     }
     ``` 
-- all variables must be named using the snake_case naming convention
+- all variables must be named using the camelCase naming convention
 
     e.g
     ```javascript
-    const my_num = 123
-    const my_str = "123"
-    const my_obj = {}
+    const myNum = 123
+    const myStr = "123"
+    const myObj = {}
     ```
 
 - all constants must be named using the snake_case naming convention with UPPERCASING
