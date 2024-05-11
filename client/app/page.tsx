@@ -1,5 +1,5 @@
 import { Header } from "@/components/header";
-import Wrapper from "@/components/ui/wrapper";
+import { Wrapper } from "@/components/ui/wrapper";
 
 export default function Home() {
   return (

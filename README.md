@@ -10,6 +10,7 @@ this project is intended for learning purposes only
 
 ```bash
 cd backend
+npm install
 npm run dev
 ```
 
@@ -20,6 +21,7 @@ First, run the development server:
 
 ```bash
 cd client
+npm i
 npm run dev
 ```
 
