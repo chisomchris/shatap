@@ -6,14 +6,14 @@ declare global {
   }
 }
 
-import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
-import { Wrapper } from "./ui/wrapper";
+import { Wrapper } from "../../components/ui/wrapper";
 import { Check, Image, ImagePlus, RefreshCcwDot, X } from "lucide-react";
-import { ModeToggle } from "./ui/toggle";
+import { ModeToggle } from "../../components/ui/toggle";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "../../components/ui/button";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export function Camera() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -86,18 +86,30 @@ export function Camera() {
 
   useEffect(() => {
     if (navigator.mediaDevices && width && height && !isStreaming) {
+      const constraints =
+        width > 768
+          ? {
+              video: {
+                width: {
+                  exact: 640,
+                },
+                aspectRatio: 4 / 3,
+              },
+              audio: false,
+            }
+          : {
+              video: {
+                width: {
+                  exact: width,
+                },
+                height: {
+                  exact: height - 76 - 160,
+                },
+              },
+              audio: false,
+            };
       navigator.mediaDevices
-        .getUserMedia({
-          video: {
-            width: {
-              exact: width,
-            },
-            height: {
-              exact: height - 76 - 160,
-            },
-          },
-          audio: false,
-        })
+        .getUserMedia(constraints)
         .then((stream) => {
           {
             if (videoRef.current instanceof HTMLVideoElement) {
@@ -124,7 +136,7 @@ export function Camera() {
     <>
       <main className="min-h-screen flex flex-col justify-between overflow-y-hidden">
         <div className="bg-background h-[80px] flex items-center">
-          <Wrapper className="flex items-center justify-between">
+          <Wrapper className="flex items-center justify-between md:max-w-3xl">
             <Link href="/" className="text-3xl" onClick={closeCamera}>
               <X />
             </Link>
@@ -136,7 +148,7 @@ export function Camera() {
           <video
             ref={videoRef}
             style={{ transform: "scale(-1,1)" }}
-            className="h-full w-full"
+            className="h-full w-full md:w-[640px] md:mb-4 md:mx-auto md:rounded-lg"
             onCanPlay={() => canPlay(canvasRef.current)}
             autoPlay
           ></video>
@@ -194,7 +206,7 @@ function Control({
   ) => void;
 }) {
   return (
-    <Wrapper className="flex items-center justify-between pt-1">
+    <Wrapper className="flex items-center justify-between pt-1 md:max-w-3xl">
       <button className="bg-accent-foreground/5 p-3 rounded-full">
         <Image size={28} />
       </button>
@@ -244,8 +256,8 @@ function ImageModal({
         </Wrapper>
       </div>
 
-      <div>
-        <img alt="snapshot" className="w-full" src={src} />
+      <div className="md:mx-auto">
+        <img alt="snapshot" className="rounded" src={src} />
       </div>
       <Wrapper className="bg-background h-[176px] flex flex-col">
         <div className="flex items-center justify-between gap-4 mt-auto">

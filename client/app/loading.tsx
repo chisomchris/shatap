@@ -1,4 +1,9 @@
+import { Wrapper } from "@/components/ui/wrapper";
+
 export default function Loading() {
-    // Or a custom loading skeleton component
-    return <p>Loading...</p>
-  }
+  return (
+    <Wrapper>
+      <p>Loading...</p>;
+    </Wrapper>
+  );
+}

@@ -1,12 +1,18 @@
-import { Wrapper } from '@/components/ui/wrapper'
-import Link from 'next/link'
- 
+import { Wrapper } from "@/components/ui/wrapper";
+import { headers } from "next/headers";
+import Link from "next/link";
+
 export default function NotFound() {
+  const headersList = headers();
+  const url = decodeURIComponent(headersList.get("x-url") || "/");
+  const { pathname } = new URL(url);
   return (
     <Wrapper>
-      <h2>Not Found</h2>
+      <h2>
+        <span>{pathname}</span> Not Found
+      </h2>
       <p>Could not find requested resource</p>
       <Link href="/">Return Home</Link>
     </Wrapper>
-  )
+  );
 }

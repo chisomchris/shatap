@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Poppins as FontPoppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/providers/theme";
+import { AuthProvider } from "@/providers/auth";
 
 const poppins = FontPoppins({
   variable: "--font-poppins",
@@ -34,7 +35,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
     </html>
