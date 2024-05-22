@@ -9,6 +9,7 @@ export const Protected = async ({ children }: PropsWithChildren) => {
   const redirect_url = decodeURIComponent(headersList.get("x-url") || "/");
 
   const session = await getServerSession(authOptions);
+
   if (!session) {
     return redirect(`/auth/login?redirect_uri=${redirect_url}`);
   }

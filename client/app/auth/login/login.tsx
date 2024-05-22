@@ -14,6 +14,9 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { z } from "zod";
 import { Wrapper } from "@/components/ui/wrapper";
 import { FInput, FPasswordInput } from "@/components/input-with-formik";
+import Image from "next/image";
+import google_icon from "@/assets/google-icon.svg";
+import { Github } from "@/components/icons/github";
 
 export const Login = ({
   csrfToken,
@@ -73,7 +76,28 @@ export const Login = ({
             <Logo />
             <ModeToggle />
           </div>
-          <p className="py-6">Login now</p>
+
+          <Button onClick={() => signIn("google")} className="w-full mt-12">
+            <Image
+              src={google_icon}
+              alt="google icon"
+              width={24}
+              height={24}
+              className="mr-2"
+            />{" "}
+            Sign in with Google
+          </Button>
+
+          <Button onClick={() => signIn("github")} className="w-full mt-4">
+            <Github className="mr-2" />
+            Sign in with Github
+          </Button>
+
+          <p className="py-6 grid place-items-center relative">
+            <span className="before:h-[2px] before:rounded before:w-[calc(50%-2.5rem)] before:left-[1rem] before:top-1/2 before:-translate-y-1/2 before:bg-accent-foreground/50 before:absolute after:h-[2px] after:rounded after:w-[calc(50%-2.5rem)] after:right-[1rem] after:top-1/2 after:-translate-y-1/2 after:bg-accent-foreground/50 after:absolute">
+              Or
+            </span>
+          </p>
           <form
             onSubmit={formik.handleSubmit}
             onChange={(e) => {
@@ -83,8 +107,17 @@ export const Login = ({
             }}
           >
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <FInput name="email" type={"email"} formik={formik} />
-            <FPasswordInput name="password" formik={formik} />
+            <FInput
+              name="email"
+              type={"email"}
+              formik={formik}
+              placeholder="email"
+            />
+            <FPasswordInput
+              name="password"
+              formik={formik}
+              placeholder="password"
+            />
             <p className="pt-6 pb-4">
               <Link href="/auth/forgot-password">Forgot passwrod</Link>
             </p>

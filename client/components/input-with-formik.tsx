@@ -11,6 +11,7 @@ export const FInput = ({
   type: string;
   name: string;
   formik: any;
+  [k: string]: any;
 }) => {
   return (
     <div className="py-2 w-full">
@@ -29,6 +30,7 @@ export const FPasswordInput = ({
 }: {
   name: string;
   formik: any;
+  [k: string]: any;
 }) => {
   const [seePassword, setSeePassword] = useState(false);
   const toggleVisibility = () => {

@@ -8,9 +8,9 @@ export const LogoutButton = () => {
   const { data: session } = useSession();
   const logOut = async () => {
     try {
-      await axios.get(
-        `${env.API_BASE_URL}/v1/logout?refresh_token=${session?.refreshToken}`
-      );
+      // axios.get(
+      //   `${env.API_BASE_URL}/v1/logout?refresh_token=${session?.refreshToken}`
+      // );
       await signOut();
     } catch (error) {
       // console.log(error);
