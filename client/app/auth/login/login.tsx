@@ -20,12 +20,13 @@ import { Github } from "@/components/icons/github";
 
 export const Login = ({
   csrfToken,
+  callback_url,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const router = useRouter();
-  const callbackUrl = searchParams.get("redirect_uri") || "/";
+  // const callbackUrl = searchParams.get("redirect_uri") || "/";
 
   const onSubmit = async (values: FormikValues) => {
     try {
@@ -35,13 +36,13 @@ export const Login = ({
         email,
         password,
         redirect: false,
-        callbackUrl,
+        callbackUrl: callback_url,
       });
       if (!response?.ok || response.error) {
         return setError("Invalid email or password");
       }
       if (!response?.error) {
-        router.push(callbackUrl);
+        router.push(callback_url);
       }
     } catch (error) {
       setError("An error occured");

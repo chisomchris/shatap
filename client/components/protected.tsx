@@ -6,7 +6,7 @@ import { PropsWithChildren } from "react";
 
 export const Protected = async ({ children }: PropsWithChildren) => {
   const headersList = headers();
-  const redirect_url = decodeURIComponent(headersList.get("x-url") || "/");
+  const redirect_url = headersList.get("x-url") || "/";
 
   const session = await getServerSession(authOptions);
 
