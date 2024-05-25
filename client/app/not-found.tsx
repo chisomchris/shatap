@@ -6,8 +6,8 @@ export const metadata = { title: "Shatapp | Not Found" };
 
 export default function NotFound() {
   const headersList = headers();
-  const url = decodeURIComponent(headersList.get("x-url") || "/");
-  const { pathname } = new URL(url);
+  const url = JSON.parse(headersList.get("x-url") || "{}");
+  const { pathname } = url;
 
   return (
     <Wrapper>

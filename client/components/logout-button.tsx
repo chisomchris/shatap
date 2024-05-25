@@ -7,14 +7,12 @@ import { env } from "@/lib/env";
 export const LogoutButton = () => {
   const { data: session } = useSession();
   const logOut = async () => {
-    try {
-      // axios.get(
-      //   `${env.API_BASE_URL}/v1/logout?refresh_token=${session?.refreshToken}`
-      // );
-      await signOut();
-    } catch (error) {
-      // console.log(error);
-    }
+    axios
+      .get(
+        `${env.API_BASE_URL}/v1/logout?refresh_token=${session?.refreshToken}`
+      )
+      .then(() => signOut())
+      .catch((err) => console.log(err));
   };
   return <Button onClick={logOut}>Logout</Button>;
 };

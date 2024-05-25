@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FormikValues, useFormik } from "formik";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { ModeToggle } from "@/components/ui/toggle";
@@ -24,9 +24,6 @@ export const Login = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  // const searchParams = useSearchParams();
-  const router = useRouter();
-  // const callbackUrl = searchParams.get("redirect_uri") || "/";
 
   const onSubmit = async (values: FormikValues) => {
     try {
@@ -42,7 +39,7 @@ export const Login = ({
         return setError("Invalid email or password");
       }
       if (!response?.error) {
-        router.push(callback_url);
+        useRouter().push(callback_url);
       }
     } catch (error) {
       setError("An error occured");
@@ -78,7 +75,14 @@ export const Login = ({
             <ModeToggle />
           </div>
 
-          <Button onClick={() => signIn("google")} className="w-full mt-12">
+          <Button
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: callback_url,
+              })
+            }
+            className="w-full mt-12"
+          >
             <Image
               src={google_icon}
               alt="google icon"
@@ -89,7 +93,14 @@ export const Login = ({
             Sign in with Google
           </Button>
 
-          <Button onClick={() => signIn("github")} className="w-full mt-4">
+          <Button
+            onClick={() =>
+              signIn("github", {
+                callbackUrl: callback_url,
+              })
+            }
+            className="w-full mt-4"
+          >
             <Github className="mr-2" />
             Sign in with Github
           </Button>

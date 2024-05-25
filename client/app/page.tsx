@@ -383,25 +383,27 @@ export default function Home() {
    */
   return (
     <Protected>
-      <main className="md:flex md:fixed md:left-0 md:top-0 md:right-0 md:bottom-0">
-        <div className="md:w-[380px] md:overflow-y-scroll md:shrink-0 md:h-dvh md:shadow-[4px_0px_hsla(var(--accent))]">
-          <Header className="bg-background md:z-50 md:sticky md:top-0" />
-          <Wrapper className="grid gap-2">
-            {users.map((user, i) => (
-              <ChatItem
-                key={i}
-                name={user.name}
-                avatar={user.avatar}
-                last_action={user.last_action}
-                timestamp={user.timestamp}
-                unread_count={user.unread_count}
-              />
-            ))}
-          </Wrapper>
-        </div>
+      <Wrapper className="relative h-dvh">
+        <main className="md:flex md:absolute md:left-0 md:top-0 md:right-0 md:bottom-0">
+          <div className="md:w-[380px] md:overflow-y-scroll md:shrink-0 md:h-dvh md:shadow-[4px_0px_hsla(var(--accent))]">
+            <Header className="bg-background md:z-50 md:sticky md:top-0" />
+            <div className="grid gap-2">
+              {users.map((user, i) => (
+                <ChatItem
+                  key={i}
+                  name={user.name}
+                  avatar={user.avatar}
+                  last_action={user.last_action}
+                  timestamp={user.timestamp}
+                  unread_count={user.unread_count}
+                />
+              ))}
+            </div>
+          </div>
 
-        <div className="grow hidden h-dvh md:block md:overflow-y-scroll"></div>
-      </main>
+          <div className="grow hidden h-dvh md:block md:overflow-y-scroll"></div>
+        </main>
+      </Wrapper>
     </Protected>
   );
 }
